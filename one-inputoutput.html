@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/wjk2myn.css">
+    <title>CHICO ADJECTIVE MATCHER</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 100px;
+            padding: 20px;
+        }
+
+        .container {
+            padding: 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: "salsero", serif;
+            font-weight: 400;
+            color: #ff54bb;
+            margin-bottom: 10px;
+            font-size: 200px;
+        }
+
+        #adjectiveInput {
+            font-size: 18px;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 180px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #adjectiveInput:focus {
+            border-color: #999;
+            outline: none;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* STYLE FOR THE IMAGE */
+        #displayedImage {
+            display: none; /* This line is mandatory */
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructions {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .adjective-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .adjective-badge {
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .adjective-badge:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CHICO!</h1>
+        <p class="instructions">Enter an adjective or click one below to get your matching Chico:</p>
+        
+        <div class="adjective-list">
+            <span class="adjective-badge" onclick="selectAdjective('Happy')">Happy</span>
+            <span class="adjective-badge" onclick="selectAdjective('Sad')">Sad</span>
+            <span class="adjective-badge" onclick="selectAdjective('Angry')">Angry</span>
+            <span class="adjective-badge" onclick="selectAdjective('Sleepy')">Sleepy</span>
+            <span class="adjective-badge" onclick="selectAdjective('Hungry')">Hungry</span>
+            <span class="adjective-badge" onclick="selectAdjective('Excited')">Excited</span>
+            <span class="adjective-badge" onclick="selectAdjective('Mean')">Mean</span>
+            <span class="adjective-badge" onclick="selectAdjective('Nice')">Nice</span>
+            <span class="adjective-badge" onclick="selectAdjective('Frightened')">Frightened</span>
+            <span class="adjective-badge" onclick="selectAdjective('Ugly')">Ugly</span>
+            <span class="adjective-badge" onclick="selectAdjective('Beautiful')">Beautiful</span>
+            <span class="adjective-badge" onclick="selectAdjective('Cute')">Cute</span>
+            <span class="adjective-badge" onclick="selectAdjective('Fat')">Fat</span>
+            <span class="adjective-badge" onclick="selectAdjective('Scary')">Scary</span>
+            <span class="adjective-badge" onclick="selectAdjective('Rich')">Rich</span>
+            <span class="adjective-badge" onclick="selectAdjective('Poor')">Poor</span>
+            <span class="adjective-badge" onclick="selectAdjective('Smelly')">Smelly</span>
+            <span class="adjective-badge" onclick="selectAdjective('Confident')">Confident</span>
+            <span class="adjective-badge" onclick="selectAdjective('Sick')">Sick</span>
+            <span class="adjective-badge" onclick="selectAdjective('Inspired')">Inspired</span>
+            <span class="adjective-badge" onclick="selectAdjective('Weird')">Weird</span>
+            <span class="adjective-badge" onclick="selectAdjective('Normal')">Normal</span>
+            <span class="adjective-badge" onclick="selectAdjective('Chud')">Chud</span>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="adjectiveInput" placeholder="Type an adjective" oninput="displayImage()">
+        </div>
+
+        <img id="displayedImage" src="" alt="Displayed Image">
+    </div>
+
+    <script>
+        const adjectiveMap = {
+            "HAPPY": "https://media.discordapp.net/attachments/1224638343938314321/1344127434550939731/IMG_4061.jpg?ex=67bfc7b9&is=67be7639&hm=7c5a0754424e421f895414ec287a11f2bcd47d420705b1a16d94650774f17668&=&format=webp&width=878&height=1170",
+            "SAD": "https://media.discordapp.net/attachments/1224638343938314321/1344127600116764806/IMG_1119.jpg?ex=67bfc7e0&is=67be7660&hm=8fc7367236606bcf0ca705013e0232144ecc14aa729a102571620a7381c12d4b&=&format=webp&width=878&height=1170",
+            "ANGRY": "https://media.discordapp.net/attachments/1224638343938314321/1344127480822370355/IMG_0564.jpg?ex=67bfc7c4&is=67be7644&hm=56b539e06a7353c6b625c7c43722f452fd8f2aacf82e66e15038c30c08a0057b&=&format=webp&width=878&height=1170",
+            "SLEEPY": "https://media.discordapp.net/attachments/1224638343938314321/1344127602457055302/IMG_0836.jpg?ex=67bfc7e1&is=67be7661&hm=f88cce8f2125837220952bd23b529f38ae73c6e8fd8ce8b2e7491910444b75e1&=&format=webp&width=878&height=1170",
+            "HUNGRY": "https://media.discordapp.net/attachments/1224638343938314321/1344127478603579495/IMG_0595.jpg?ex=67bfc7c3&is=67be7643&hm=42beb69d49a59524c1a540b489b923ce6ced7a1138af7b65aceab74e9da92812&=&format=webp&width=878&height=1170",
+            "EXCITED": "https://media.discordapp.net/attachments/1224638343938314321/1344127433011495013/IMG_4078.jpg?ex=67bfc7b8&is=67be7638&hm=d21be28d64a9011133e71e284ec57570596c1730d56d04effe4cb71cfd6c6a31&=&format=webp&width=878&height=1170",
+            "MEAN": "https://media.discordapp.net/attachments/1224638343938314321/1344127729599254528/IMG_0160.jpg?ex=67bfc7ff&is=67be767f&hm=931e2b3ee7b4340eb3a52b355e943ff052ba496f8e2d2cbdeff5a9fdbce11795&=&format=webp&width=878&height=1170",
+            "NICE": "https://media.discordapp.net/attachments/1224638343938314321/1344127432269238303/IMG_4076.jpg?ex=67bfc7b8&is=67be7638&hm=2391f68ee17e89ac46cceeb9939f507176ad14459fee6a742e3f0ff6c2951626&=&format=webp&width=878&height=1170",
+            "FRIGHTENED": "https://media.discordapp.net/attachments/1224638343938314321/1344127489546649620/IMG_0415.jpg?ex=67bfc7c6&is=67be7646&hm=30375c113fd756096916fb41bf381a76e7b9db7a3fd888eb667204529005ddb1&=&format=webp&width=878&height=1170",
+            "UGLY": "https://media.discordapp.net/attachments/1224638343938314321/1344127596362993746/IMG_1341.jpg?ex=67bfc7df&is=67be765f&hm=0000e15d9bc7ffbf2f4350b692c752da68d8445397153bb484f5d4a99ec843de&=&format=webp&width=878&height=1170",
+            "BEAUTIFUL": "https://media.discordapp.net/attachments/1224638343938314321/1344127727837384704/IMG_7976.jpg?ex=67bfc7ff&is=67be767f&hm=7dae405905b25d7d43244c713240d548bf7021cfd784b2cb188ba997f745de9c&=&format=webp&width=878&height=1170",
+            "CUTE": "https://media.discordapp.net/attachments/1224638343938314321/1344127733290237992/IMG_0432.jpg?ex=67bfc800&is=67be7680&hm=2752d85a8014c44e72981ccde05c192c5d57e6bf065a78da2b82ad797f8d0134&=&format=webp&width=878&height=1170",
+            "FAT": "https://media.discordapp.net/attachments/1224638343938314321/1344127601626714212/IMG_0826.jpg?ex=67bfc7e0&is=67be7660&hm=ad9b27c7dac6d46201d5a8337600076691b1846db081fab355fd1ea75df19bd9&=&format=webp&width=878&height=1170",
+            "SCARY": "https://media.discordapp.net/attachments/1224638343938314321/1344127728634429530/IMG_5368.jpg?ex=67bfc7ff&is=67be767f&hm=5787c18ef90c549d261fe20ff456717c958f3070b2018c7e9db9e43fbee3dea2&=&format=webp&width=878&height=1170",
+            "RICH": "https://media.discordapp.net/attachments/1224638343938314321/1344127603203903528/IMG_0711.jpg?ex=67bfc7e1&is=67be7661&hm=a64e09e3f2fda258eb770708a2bc93da04d5f2df8c645129329b09ab97e73edd&=&format=webp&width=878&height=1170",
+            "POOR": "https://media.discordapp.net/attachments/1224638343938314321/1344127732552044554/IMG_0501.jpg?ex=67bfc800&is=67be7680&hm=a404eaf045f222c933f649789969718ec4e375e322d6b1466c0571595712448b&=&format=webp&width=878&height=1170",
+            "SMELLY": "https://media.discordapp.net/attachments/1224638343938314321/1344127726042484828/IMG_4723.jpg?ex=67bfc7fe&is=67be767e&hm=7055ec8ef0352569630483f3bebbb22dd1b5f9f767fd4b85aad0c36dd88dc96f&=&format=webp&width=878&height=1170",
+            "CONFIDENT": "https://media.discordapp.net/attachments/1224638343938314321/1344127600884318218/IMG_0816.jpg?ex=67bfc7e0&is=67be7660&hm=81601f95bfaaad4da7fa02e5a3210506dd75900f2d1a6c1084c1be80f4344580&=&format=webp&width=878&height=1170",
+            "SICK": "https://media.discordapp.net/attachments/1224638343938314321/1344127731427835934/IMG_0161.jpg?ex=67bfc7ff&is=67be767f&hm=1b4d143acfc93617c78ea4898c6a7e88d1169e4bbfbcd16728f1197aa517286c&=&format=webp&width=878&height=1170",
+            "INSPIRED": "https://media.discordapp.net/attachments/1224638343938314321/1344127597176688760/70891391998__1FDFC334-618F-4CBE-B1EA-7F0B5A6DC61D.jpg?ex=67bfc7df&is=67be765f&hm=5c31257dfd6a5d3109755d55956c32212a6ae987fefd248991c0ee27bef3eb52&=&format=webp&width=878&height=1170",
+            "WEIRD": "https://media.discordapp.net/attachments/1224638343938314321/1344127480017195049/IMG_0563.jpg?ex=67bfc7c3&is=67be7643&hm=240c73285b04b645320ee062ea999fd13b1edc000be2daf9f1d04c649453f998&=&format=webp&width=1410&height=1058",
+            "NORMAL": "https://media.discordapp.net/attachments/1224638343938314321/1344127433787310130/IMG_4026.jpg?ex=67bfc7b8&is=67be7638&hm=326cfae6529f3b936e717571941ed33592b34db6f6b5a7ae3be212905945a6fe&=&format=webp&width=878&height=1170",
+            "CHUD": "https://media.discordapp.net/attachments/1224638343938314321/1344127431480443002/IMG_4093.jpg?ex=67bfc7b8&is=67be7638&hm=6762bac57bb9bb9c3b0681e09dd31ea0ba562278e2264a7116137da91b002009&=&format=webp&width=878&height=1170",
+        };
+
+        function selectAdjective(adjective) {
+            document.getElementById("adjectiveInput").value = adjective;
+            displayImage();
+        }
+
+        let typingTimer;
+        const doneTypingInterval = 500; 
+
+        function displayImage() {
+            clearTimeout(typingTimer);
+            const input = document.getElementById("adjectiveInput").value.toUpperCase();
+            const imgElement = document.getElementById("displayedImage");
+            
+            if (input.trim() === "") {
+                imgElement.style.display = "none";
+                return;
+            }
+            
+            typingTimer = setTimeout(() => {
+                if (adjectiveMap[input]) {
+                    imgElement.src = adjectiveMap[input];
+                    imgElement.style.display = "block";
+                } else {
+                    const partialMatches = Object.keys(adjectiveMap).filter(key => 
+                        key.startsWith(input) && input.length >= 2);
+                    
+                    if (partialMatches.length > 0) {
+                        return;
+                    }
+                }
+            }, doneTypingInterval);
+        }
+
+        // Focus the input field when the page loads
+        window.onload = function() {
+            document.getElementById("adjectiveInput").focus();
+        };
+    </script>
+</body>
+</html>
